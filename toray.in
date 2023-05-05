@@ -1,0 +1,20 @@
+echres toray.in template file for DIII-D conditions
+ &EDATA
+  powinc =   1.00000e+13
+  smax =       150.000
+  ds =      0.500000
+  dsmin =      0.200000
+  pwrfmin =    0.00100000
+  igafit =        1
+  fdout =       2.00000
+  nharm =        2
+  mray(1) =        1
+  mray(2) =        5
+  mray(3) =       12
+  mray(4) =       12
+  gauszone =        4
+  netcdfdat = .true.
+  cqldat = .false.
+  nlout(1) = .false.
+  nlout(2) = .false.
+ &END_OF_EDATA

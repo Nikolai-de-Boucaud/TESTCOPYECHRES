@@ -1,0 +1,17 @@
+! IT IS VITALLY IMPORTANT THAT THERE BE ****NO WHITESPACE****
+! AFTER THE END OF THE LAST \ ON THE LINES BELOW.  IF THERE IS,
+! THIS SCRIPT WILL NOT WORK ON LINUX OR TRU64 UNIX (WILL STILL
+! WORK ON HP-UX).  - Jeff Schachter, 2001.03.22
+
+!Idl*XmLGrid.background: Green
+
+Idl*XmLGrid.editTranslations:  #override \n\
+                <Key>osfDelete:    delete-previous-character()\n\
+   ~Ctrl  Shift <Key>Tab:          XmLGridEditComplete(LEFT)\n\
+   ~Ctrl ~Shift <Key>Tab:          XmLGridEditComplete(RIGHT)\n\
+   ~Ctrl ~Shift <Key>osfDown:      XmLGridEditComplete(DOWN)\n\
+   ~Ctrl ~Shift <Key>osfUp:        XmLGridEditComplete(UP)\n
+
+Idl*XmText.translations:   #override \n\
+	<Key>osfDelete:    delete-previous-character()\n
+

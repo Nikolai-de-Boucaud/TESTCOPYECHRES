@@ -1,0 +1,7 @@
+To compile new versions of echres, do
+idl echres_modules
+
+To start efitviewer with the echres overlay,
+use ./myefitviewer.
+
+

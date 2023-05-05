@@ -1,0 +1,15 @@
+#! /bin/csh -f
+
+set files=(efit_viewer.compile efitviewer efitviewerstartup.pro)
+set tarfile=EFITViewer-1.0.tar
+set rpmroot=/usr/src/redhat
+set srcroot=EFITViewer-1.0
+mkdir -p $srcroot
+cp $files $srcroot
+tar -cvf $tarfile $srcroot/*
+gzip -f $tarfile
+cp $tarfile.gz $rpmroot/SOURCES
+cp efitviewer.spec $rpmroot/SPECS
+ls -al $rpmroot/SPECS
+rpm -ba --test $rpmroot/SPECS/efitviewer.spec
+rm -r $srcroot

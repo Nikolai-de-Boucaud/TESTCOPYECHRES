@@ -1,0 +1,226 @@
+ &SETUP
+ IBOX = 'cardboard'
+ IUSER = 'ECHRESuser'
+ IOUTPUT =  6
+ LRZ =  24
+ NOPLOTS = 'enabled'
+ MNEMONIC = 'NEW'
+ &END
+ &SETUP
+ ACOEFNE =   -1.80000  -7.83000  51.5700  -353.680
+ ACOEFTE =   8.01000  -13.6000  8.69000  -114.590
+ BNUMB =  -1.00000  1.0000  -1.0000
+ BOOTST = 'disabled'
+ BTH =  1000.00
+ BTOR =  10320.0
+ CHANG = 'noneg'
+ COLMODL =  3
+ CONTRMIN =  1.00000e-12
+ DTR =  1.00000
+ EEGY(1,1,1,1) =  0.00000
+ EEGY(1,2,1,1) =  2.00000
+ EEGY(2,1,1,1) =  0.00000
+ EEGY(2,2,1,1) =  6.00000
+ ELECFLD(0) =  0.000468000  
+ ELECFLD(1) =  0.000468000
+ ENLOSS =  200.000
+ ENMAX =  100.000
+ ENMIN =  5.00000
+ ENORM =  150.000
+ EOVED =  0.00000
+ EPHICC =  1.00000
+ FDS =  0.200000
+ FMASS =   9.10950e-28  3.34000e-24  9.10950e-28
+ GAMASET =  0.00000
+ GSLA =  270.000
+ GSLB =  35.0000
+ IACTST = 'enabled'
+ IDSKF = 'disabled'
+ IDSKRF = 'disabled'
+ IMPLCT = 'enabled'
+ INEG = 'disabled'
+ IPROELEC = 'spline'
+ IPRONE = 'spline'
+ IPROTE = 'spline'
+ IPROTI = 'spline'
+ IPROZEFF = 'spline'
+ IPXY =  150
+ IRZPLT =  3  5  8  10  12  14  16  18  20  22
+ IY =  150
+ IZEFF = 'backgrnd'
+ JPXY =  300
+ JX =  300
+ KFRSOU =  0
+ KPRESS(2) = 'enabled'
+ #kspeci(1,1) = 'e'
+ #kspeci(2,1) = 'general'
+ #kspeci(1,2) = 'd'
+ #kspeci(2,2) = 'maxwell'
+ #kspeci(1,3) = 'e'
+ #kspeci(2,3) = 'maxwell'
+ LBDRY(1) = 'scale'
+ LOCQUAS = 'disabled'
+ LOSSMODE = 'disabled'
+ LZ =  80
+ MACHINE = 'toroidal'
+ MANYMAT = 'disabled'
+ MESHY = 'fixed_y'
+ MX =  3
+ NCHEC =  1
+ NCOEF =  1
+ NCONT =  20
+ NEN =  30
+ NETCDFNM = 'enabled'
+ NETCDFVECAL = 'x-theta'
+ NETCDFVECRF = 'x-theta'
+ NETCDFVECC = 'disabled'
+ NETCDFVECS = 'all'
+ NGEN =  1
+ NJENE =  11
+ NMAX =  2
+ NOFFEL =  10000
+ NONEL =  10000
+ NPLOT =  12
+ NPLT3D =  12
+ NRSKIP =  0
+ NRSTRT =  1
+ NSTOP =  6
+ NUMBY =  30
+ NV =  7
+ PARTNER = 'disabled'
+ PLTVS = 'rho'
+ PROFPSI = 'disabled'
+ PSIMODEL = 'spline'
+ QSINEUT = 'disabled'
+ RADMAJ =  700.000
+ RADMIN =  250.000
+ RD =  300.000
+ RELATIV = 'enabled'
+ RFACZ =  1.00000
+ RMIRROR =  7.50000
+ ROVERA =  1.00000e-06
+ ROVERAM =  0.00000
+ RYA(1) =  0.10 0.15 0.20 0.22 0.25 0.27 0.30 0.32 0.35 0.38 0.40 0.42  
+ 		   0.45 0.48 0.55 0.60 0.65 0.70 0.75 0.80 0.82 0.84 0.88 0.90
+ RYAIN =   0.00 0.10 0.20 0.30 0.40 0.50 0.60 0.70 0.80 0.90 1.00
+ RZSET = 'enabled'
+ SOFTXRY = 'disabled'
+ SYNCRAD = 'disabled'
+ TAULOSS(1,1) =  0.300000
+ TAULOSS(2,1) =  0.00000
+ TAULOSS(3,1) =  0.00000
+ TAUNEW = 'enabled'
+ TBND =  0.00200000
+ TEIN =   3.27890  3.05710  2.55620  1.93270  1.38220  1.00560  0.747000
+  0.545900  0.381800  0.242300  0.115200
+ TFAC =  0.750000
+ TFACZ =  1.00000
+ THET1 =   0.00000  0.125300  0.252700  0.384400  0.00000  0.00000  0.00000
+ THET2 =   0.00000  0.00000  0.00000  0.00000  0.909900  1.10120  -0.909900
+ THETD =  0.00000
+ TIIN =   2.34770  1.93970  1.56060  1.26790  1.04400  0.871400  0.732500
+  0.609800  0.489300  0.368900  0.248500
+ TORLOSS(1) = 'disabled'
+ TRAPMOD = 'disabled'
+ TRAPREDC = 0.0
+ VECLNTH =  1.50000
+ XFAC =  1.00000
+ XLWR =  0.1250000
+ XMDL =  0.650000
+ XPCTLWR =  0.120000
+ XPCTMDL =  0.800000
+ YLOWER =  1.22000
+ YRESET = 'disabled'
+ YUPPER =  1.27500
+ ZMAX =  408.000
+ ENEIN =   7.98968e+13  7.65181e+13  6.97672e+13  6.35287e+13  6.00518e+13
+  6.09604e+13  6.11433e+13  5.19282e+13  4.39367e+13  3.83595e+13  9.20059e+12
+ ZEFFIN =   1.98607  1.95821  1.99152  2.05132  2.10584  2.12363  2.18708
+  2.47262  2.74205  2.45218  2.28364
+ ELECIN =   11*0.0
+ &END
+ &TRSETUP
+ &END
+ &SOUSETUP
+ NOFFSO(1,1) =  10000
+ NOFFSO(1,2) =  10000
+ NONSO(1,1) =  0
+ NONSO(1,2) =  0
+ NSO =  0
+ NSOU =  1
+ PLTSO = 'enabled'
+ SOUCOORD = 'disabled'
+ KOMODEL = 'mr'
+ FLEMODEL = 'pol'
+ KNOCKON = 'disabled'
+ JFL =  350
+ NKORFN =  1
+ NONKO =  0
+ NOFFKO =  10000
+ SOFFVTE =  -3.00000
+ SOFFPR =  0.500000
+ ISOUCOF =  1
+ FACCOF =  0.500000
+ XLFAC =  -0.500000
+ XLLWR =  0.000500000
+ XLMDL =  0.0500000
+ XLPCTLWR =  0.150000
+ XLPCTMDL =  0.600000
+ &END
+ &EQSETUP
+ ATOL =  1.00000e-08
+ BSIGN =  -1.00000
+ ELLPTCTY =  0.00000
+ EQMOD = 'enabled'
+ EQPOWER =  2
+ EQSOURCE = 'eqdsk'
+ EQDSKIN = 'eqdsk'
+ EQSYM = 'avg_zmag'
+ FPSIMODL = 'constant'
+ METHFLAG =  10
+ NCONTEQ = 'psigrid'
+ RBOX =  92.0000
+ RBOXDST =  120.000
+ RMAG =  166.000
+ RTOL =  1.00000e-08
+ ZBOX =  92.0000
+ &END
+ &RFSETUP
+ CALL_LH = 'disabled'
+ CALL_ECH = 'disabled'
+ CALL_FW = 'disabled'
+ LH = 'disabled'
+ ECH = 'enabled'
+ RFREAD = 'netcdf'
+ RFFILE = 'toray.nc'
+ FW = 'disabled'
+ IURFL = 'damp_out'
+ IURFCOLL = 'disabled'
+ NBSSLTBL =  2000
+ NHARMS =  1
+ NHARM1 =  2
+ NRFITR1 =  1000
+ NRFITR2 =  0
+ NRFITR3 =  1
+ NRFPWR =  0
+ NRFSTEP1(1) =  600
+ NRFSTEP1(2) =  600
+ NRFSTEP2 =  0
+ NOFFRF(1) =  100000
+ NONRF(1) =  0
+ NRF =  0
+ PWRSCALE =  3*1.00000
+ SCALEURF = 'enabled'
+ URFDMP = 'secondd'
+ URFMOD = 'enabled'
+ VLFMOD = 'disabled'
+ VLHMOD = 'disabled'
+ VPRPROP = 'disabled'
+ &END
+ &FRSETUP
+ &END
+end
+end
+LEAVE
+THESE
+HERE!

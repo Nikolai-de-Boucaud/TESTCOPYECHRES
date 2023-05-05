@@ -1,0 +1,34 @@
+namelist for entering ech data into echin.nc file
+&ECHDATA
+ MACHINE='FDF'
+ TMIN=0.		! timebase starts (msec)
+ TMAX=10.	! timebase ends (msec)
+ NTIMES=501	! number points in timebase
+ !
+ ! From/for inone
+ !
+ TORAY_VERSION =  1.80000
+ TORAY_PATH = '/task/imd/toray/xtoray'
+ RFON =   3.00080  3.03185  3.00080  3.00135  3.00055  3.00125  1.00000e+06 1.00000e+06
+ RFTIME =   2.79725  1.88685  2.79725  2.79680  2.79735  2.79720  -1.00000 -1.00000
+ IRFCUR = 8*1
+ FREQ = 8*1.10000e+11
+ WRFO = 8*0.00000
+ HLWEC = 8*1.70000
+ RATWEC = 8*1.00000
+ RFPOW =   475669.  51996.1  533710.  301483.  526338.  453911.  0.00000 0.00000
+ THETEC =   97.3652  108.290  109.799  96.6361  111.438  109.102  0.00000 0.00000
+ PHAIEC =   202.729  201.135  200.585  187.220  200.228  199.657  180.000 180.000
+ XEC =   239.990  239.990  239.990  239.990  239.990  239.990  239.400  239.400
+ ZEC =   67.9400  67.9400  67.9400  67.9400  67.9400  67.9400  69.6100  69.6100
+ NRAY = 8*30
+ IDAMP = 8*8
+ !
+ ! From/for toray.in
+ !
+ IGAFIT = 8*1
+ NHARM = 8*1
+ GAUSZONE = 8*4
+ NETCDFDAT = 8*1
+ MODELC = 8*5
+ /

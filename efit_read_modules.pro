@@ -1,0 +1,21 @@
+@$IDLSOURCE/data/mdsplus_modules.pro
+.run $IDLSOURCE/data/mdsplus_setup.pro
+.run $IDLSOURCE/general/subdirs
+.run $IDLSOURCE/efit/efit_filename_parse
+.run $IDLSOURCE/efit/efit_getvmsfilenames
+.run $IDLSOURCE/efit/efit_shotfiles
+.run $IDLSOURCE/efit/efit_read
+.run $IDLSOURCE/general/read_nc
+.run $IDLSOURCE/efit/efitde_read_r
+.run $IDLSOURCE/efit/efitde_read
+.run $IDLSOURCE/efit/reada
+.run $IDLSOURCE/efit/readg
+.run $IDLSOURCE/efit/readm
+.run $IDLSOURCE/efit/writea
+.run $IDLSOURCE/efit/writeg
+.run $IDLSOURCE/efit/writem
+.run $IDLSOURCE/efit/writek
+.run pushd
+.run popd
+.run reverse
+.run uniq

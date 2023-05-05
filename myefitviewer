@@ -1,0 +1,7 @@
+#! /bin/csh -f
+setenv IDL_STARTUP ''
+setenv IDL_PATH ''
+setenv EFITVIEW '$IDLSOURCE/efitview'
+#setenv ECHRES_PATH /fusion/projects/codes/echres/d3d/
+idl ./myefitviewerstartup
+exit

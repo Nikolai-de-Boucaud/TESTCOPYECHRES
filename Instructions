@@ -1,0 +1,331 @@
+
+******************************************************************
+     ****Instructions for use of ECHRES in EFITVIEWER****   
+                       R. Prater and Xi Chen
+                           May 21, 2016
+						 
+The echres code interfaces to the ECH system and facilitates
+calculating ECH effects by running the TORAY-GA code.
+
+To run the echres code, start the efitviewer by issuing the command
+"efitviewer",  choose an equilibrium, then click the "Diagnostic
+Overlays" button in the equilibrium window.  Click the
+"ECH-resonance" item in the Diagnostics and Overlays window.
+
+EQUILIBRIUM
+
+echres can run with any size of g-file up to 257x257. (Toray will 
+not run on equilibria larger than 257x257.)
+
+The toroidal field may be scaled using the g.bcentr widget. When a
+new value is entered, the toroidal field is scaled. The plasma
+current is also scaled proportionally, to keep the q profile fixed.
+Note that this scaling does not produce a real equilibrium, so large
+changes will be inaccurate.
+
+
+CONFIGURATION TABLE
+
+When the echres window appears, the first thing is to pick the ECH
+setup. This can be retrieved from MDSplus for the instant shot and
+time by using the 'Get MDS ECH Setup' button. Alternatively, the
+setup may be retrieved from a file  using the 'Read Setup file'
+button. The presently available set of gyrotrons can be retrieved by
+hitting the 'Present Gyrotron Setup' button, which is a good way to
+start a completely new setup. Note that this setup is NOT the
+current set of angles or polarizers; just the gyrotron names.
+
+Picking a setup enters values into the upper table, showing the
+frequency, launcher, port, and tank (system) number the gyrotron is
+connected to for the intant shot. The frequency column is editable,
+with up to three unique frequencies. The Xfrac column is also
+editable (the desired fraction of X-mode: 0.0 or 1.0). 
+
+The cyclotron resonances will be overplotted on the equilibrium
+window, along with the vacuum ray trajectories. Different
+frequencies have different line-styles.
+
+The 'Inputs as archived' buttons tell whether the data is as
+archived in MDSplus or whether the user has modified some value in
+the configuration table or output table. 
+
+
+WRITING A SETUP FILE
+
+The ECH setup may be written to a user file by hitting the 'Save
+setup file' button.  If the instant shot is after the last
+calibration data were entered, the 'Hardware config:' widget will
+indicate 'Present'; that is, the data reflect the most recent
+calibration. Earlier shots will indicate the 'Historical' setup;
+that is,using the calibrations for that shot. To save a setup for 
+use on future shots, the 'Use Present Hardware Config' button should
+be hit first, so that the present calibrations will be used. 
+
+After switching from 'Historical' to 'Present', it may be necessary
+to hit the 'Get Polarizers' button in order to obtain polarizer
+settings that will provide high mode purity.
+
+The 'Save setup, send to TIMCON' button first saves the setup file and 
+then sends it to the TIMCON system for implementation. The path to this 
+saved setup file should be 'searchable' ('x' permission) by others.
+For using ECH-resonance on Iris, it is suggested to save the setup files
+to /fusion/projects/results/echres/username
+
+
+ECH OUTPUT TABLE (lower table)
+
+The second table, the ECH output table, contains information about
+the setup as well as some calculated data. The 'Xfrac' column is the
+actual % mode purity, the polar and azimuthal angles describe the
+launch angles, and the 'Pol Cts' and 'Tor Cts' hold the poloidal
+(~vertical) and toroidal (~horizontal) steering counts for the
+antenna encoders. The 'Pol 1' and 'Pol 2' are the rotational
+settings of the two polarizer gratings. 
+
+The antenna steering may be changed by entering new values for the
+polar or azimuthal angle or the poloidal or toroidal counts.
+Changing any one of these values will also update the others, and
+plot the new vacuum ray trajectory on the equilibrium. 
+
+There are limits on where the ECH beams may be steered, to avoid
+heating the graphite tiles surrounding the launcher. If the steered
+location is out of bounds, the counts will turn red and a port map
+will appear. Moving the angle or counts back in bounds will cause
+the map window to disappear and the count values to turn black.
+
+
+SELECTING KINETIC PROFILES
+
+The kinetic profiles can be selected as 'Zipfits' or 'gaprofiles'
+files. In the latter case, echres will look in the starting
+directory for the files. If not found there, the code will put up a
+dialog box to ask where to look. The only necessary profiles are
+electron density and electron temperature. The Zeff profile also
+plays a role, and if not found then echres will use a constant value
+of 1.75.
+
+The 'Plot profiles' button will plot the fitted profile and the data
+it was fit from in a new window. Pressing the button again will
+cause the window to disappear.
+
+You can scale the profiles by entering new values in the 'n_e(0)' or
+'T_e(0)' widgets. These scale the entire profile so the central
+value has the entered value.
+
+
+WRITING GLOBAL INONE
+
+When the ECH settings are complete and the profiles are selected,
+the 'Write global inone' button will cause a file 'inone_global' to
+be written in the dir /cluster-scratch/username/echres/shotnumber/. 
+This procedure will read the Ti, rotation, and radiation profiles.
+If Ti is unavailable, Ti = Te will be used.
+If rotation and radiation are unavailable, it will enter zeros for
+the values. It accesses the neutral beam values using Petty's
+nbi12_8sources, with this code modified to use information about
+tilted beams and sources. The resulting file can be renamed to
+'inone' and the ONETWO transport code can be run by issuing the
+command for the latest version of ONETWO. Presently, this is
+/fusion/projects/codes/onetwo/bin/onetwo, which will run on any
+64-bit linux computer. 
+
+There is an option to write the global inone file, just select 
+'None' for the 'Kinetic Profiles' in the main window
+
+RUNNING TORAY 
+
+You can run the TORAY-GA code by pressing the 'Run TORAY' button.'
+This runs TORAY-GA for the equilibrium, profiles, and ECH setup in
+the widgets. The run takes place in the directory
+/cluster-scratch/username/echres/shotnumber/. After running, the 
+fractional absorption, the value of rho where the absorption peaks,
+and the total driven current appear in the lower table. Plots of the
+ECH profiles and other data appear in the new window.
+
+Printing the postscript file is the best way to save data, as the
+fits, the input table, the output table, and the launcher setup is
+all printed on one page along with the profiles of q and j.
+
+The rho_EC column of the output table is the rho of peak absorption
+of the central ray. The peak rho of the profile plot window and the
+postscript file is the radial location of the peak of the sum of all
+the rays. These can be slightly different. The diamond symbol
+oplotted on the ray in the equilibrium window is the location of the
+peak absorption of the central ray.
+
+For experts: Toray runs with many pre-set parameters. Some of these
+may be modified by users for  their individual needs. To do so, copy
+the namelist file $ECHRES_PATH/.echres_prefs  to your top
+level directory. The namelist elements described in this file may
+be  modified to suit your needs. 
+
+When the window with the j and q profiles has been created, the
+buttons at the bottom of the window can be used to toggle between
+nominal 1 MW/gyrotron for every gyrotron plotted or for the actusal
+powers present in the input table. Also the sum of the power
+densities and current densities will be plotted in the case of
+actual powers. The "Expand/full rho" button toggles between
+rho=[0,1]  and an expanded scale covering the radial extent where
+q_ECH > 0. When either  of these buttons is selected, a new
+postscript file is generated which will  overwrite the previous ps
+file.
+
+
+RUNNING CQL3D
+
+A button, 'Spawn CQL3D', spawns the CQL3D Fokker-Planck code. Before
+runnning CQL3D, the TORAY-GA runs must be complete, as the output
+files from TORAY are input files for CQL3D. The CQL3D calculations
+take typically 20 minutes, so this process is disconnected from the
+session and an email is generated when complete. You can modify the
+rho values where the FP equation is solved, shown as the symbols on
+the axis of the q_e profile in the TORAY Plot Window, by editing the
+cqlinput file rya values. CQL3D runs only on 64-bit linux computers.
+The CQL3D output files, netcdf and a postscript file, are placed in
+the directory /cluster-scratch/user/echres/shotnumber/cql##/.
+
+
+AUTOAIMER
+
+The AutoAimer is a way to choose the optimum ECH angles. The
+AutoAimer button brings up a GUI which lets the user specify; the
+objective (ECH without ECCD; maximizing I_ECCD; or maximizing
+j_ECCD); the toroidal sign of ECCD using the right-hand rule; the
+desired value of rho; the number of rays (30 is usually used); and
+the number of values of the polar and azimuthal angles to use.
+Pressing 'Start' runs TORAY for the matrix of polar and azimuthal
+angles and plots the contours of rho, j_ECCD, or I_ECCD in that
+space. Clicking on the plot pastes the angles into the widgets below
+the plot. 
+
+
+CONTROL OF ECHRES PARAMETERS
+
+Sometimes it is necessary or convenient to change some aspects of
+the operation of echres. This can be done through a file
+.echres_prefs which should lie in the user's top level directory.
+This file can contain the following:
+
+ $ECHRES
+  ! ds =          0.5          ! step size for toray ray (cm)
+  ! dsmin =       0.2          ! min step size (cm)
+  ! smax = 500.0               ! max ray length (cm)
+  ! idamp       =       8      ! damping model (8 is default)
+  pow_avg_half_period = 2.0    ! half averaging period (msec)
+  !!!! Following are for non-DIII-D installations !!!!
+  ! scratch_path = ''          ! eg, '/cluster-scratch' or '.' or ...
+  ! first_shot_allowed = 123575! for use with non-DIIIO-D 
+  ! tokamak = 'DIII-D'         ! or 'EAST' or 'KSTAR'
+  ! paths_to_files = '$ECHRES_PATH/paths_to_files'
+ $END_OF_ECHRES
+
+The last entry in .echres_prefs is the path to a file containing
+paths to other files needed by echres. For DIII-D, these are entered
+by default, but other installations will have to write this file, in
+the following format:
+
+toray_path=/fusion/projects/codes/toray/toray/xtoray
+cql3d_path=/fusion/projects/codes/cql3d/bin/xcql3d
+echres_present_setup=$ECHRES_PATH/present.setup
+echres_instructions=$ECHRES_PATH/Instructions
+echres_inone_template=$ECHRES_PATH/inone_linux8
+echres_cqlinput_template=$ECHRES_PATH/cqlinput_template
+echres_torayin_template=$ECHRES_PATH/toray.in_template
+
+on Saturn/Iris
+$ECHRES_PATH --- path to 
+/fusion/projects/codes/echres/d3d/echres.compile
+
+NAMELIST DATA ENTRY
+
+Namelist data entry is for use with non-DIII-D configurations,
+where nothing is available from an MDSplus database. For example,
+cases for ITER can be run this way.
+
+All inputs to echres can be made by use of a namelist file, which
+should have the following elements. Up to 6 ECH systems can be
+used. In addition, your local ~/.echres_prefs file can be used to
+control the operation of TORAY-GA. The file name should have '.ech' suffix.
+
+ECH data
+&echinputs
+ !
+ NUM_SYSTEMS = 2                      ! Number of systems, up to 6
+ !
+ ! ECH system (each has num_systems entries)
+ !
+ GYROTRON =       'Hello'  'Dolly'    ! gyrotron names
+ FREQ_GHZ =      172.000   140.000    ! frequency, GHz
+ R_LAUNCH_M =      6.485     8.500    ! launch r location, m
+ Z_LAUNCH_M =      4.110     0.550    ! launch z location, m
+ POLAR_DEG =     145.000    75.000    ! polar angle of ray bundle, deg
+ AZIMUTHAL_DEG = 210.000   185.000    ! azimuthal angle
+ HLWEC_DEG =       1.177     1.200    ! angular dispersion of ray bundle, deg
+ POWER_MW =        1.100     0.800    ! incident power, MW
+ WRFO =            0.990     0.980    ! fraction of power in o-mode
+ NHARM =           1         1        ! harmonic number for ECCD calculation
+ !
+ ! TORAY control parameters:
+ !
+ USE_ALPHA_BETA = .FALSE.             ! polar -> alpha, azimuthal -> beta
+ DS_CM = 1.1                          ! ds for toray ray tracing, cm
+ DSMIN_CM = 0.45                      ! minimum ds in absorption region
+ GAUSZONES = 4                        ! number of radial zones in Gaussian distribution
+ IDAMP = 8                            ! absorption model
+ !
+ ! Kinetic profiles
+ !
+ NJENE = 4                            ! number of density knots, up to 101
+ RENEIN =   0.0 0.245 0.740 1.0 0.0
+   0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+   0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+   0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+   0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+   0.0 0.0 0.0 0.0 0.0 0.0
+ ENEIN = 5.34078e+13  4.63186e+13  3.61325e+13  2.09374e+13 0.0
+   0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+   0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+   0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+   0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+   0.0 0.0 0.0 0.0 0.0 0.0
+ NJTE =   5
+ RTEIN =   0.00000  0.435402  0.931217  0.980207  1.00000  
+   0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+   0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+   0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+   0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+   0.0 0.0 0.0 0.0 0.0 0.0
+ TEIN =   2.82364  1.85031  0.503610  0.218340  0.0500000  
+   0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+   0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+   0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+   0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+   0.0 0.0 0.0 0.0 0.0 0.0
+ NJTI =   4
+ RTIIN =   0.00000  0.651484  0.989470  1.00000  0.0
+   0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+   0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+   0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+   0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+   0.0 0.0 0.0 0.0 0.0 0.0
+ TIIN =   4.12922  1.48687  0.565456  0.493967  0.0
+   0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+   0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+   0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+   0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+   0.0 0.0 0.0 0.0 0.0 0.0
+ NJZEF =   11
+ RZEFFIN =   0.00000  0.100000  0.200000  0.300000  0.400000  0.500000
+ 0.600000  0.700000  0.800000  0.900000  1.00000
+   0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+   0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+   0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+   0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+ ZEFFIN =   1.73318  1.75436  1.80446  1.85823  1.90606  1.96523  2.04393
+ 2.13377  2.22979  2.29685  2.21308
+   0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+   0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+   0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+   0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+ /
+

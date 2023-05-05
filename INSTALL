@@ -1,0 +1,109 @@
+;; Check for required environment variables
+print,'Checking required environment variables...'
+status = 1
+IF getenv('MDSROOT') EQ '' then begin                                   & $
+        print,'ERROR: $MDSROOT is not defined'                          & $
+        status = 0                                                      & $
+ENDIF
+IF getenv('IDLSOURCE') EQ '' then begin                                 & $
+        print,'ERROR: $IDLSOURCE is not defined'                        & $
+        status = 0                                                      & $
+ENDIF
+IF getenv('VERSION4D') EQ '' then begin                                 & $
+        print,'ERROR: $VERSION4D is not defined'                        & $
+        status = 0                                                      & $
+ENDIF
+if not status then begin                                                & $
+        print,'The required environment variables are not defined.'     & $
+        print,''                                                        & $
+        exit                                                            & $
+ENDIF	
+_IDLSOURCE_ = getenv('IDLSOURCE')
+
+;; MAKE A COPY OF 4D CODES 
+print,'Making a local copy of 4D codes in $IDLSOURCE/source4dcp...'
+if (file_search('$IDLSOURCE/efitenv/source4dcp.csh'))[0] ne '' then $
+spawn,['$IDLSOURCE/efitenv/source4dcp.csh force']
+
+;; CREATE VERSION.COMPILE
+print,'Creating the version info...'
+about_version = ''   
+openr,u,'version.txt',error=err,/get_lun
+if (err eq 0) then begin &$
+	readf,u,about_version &$   
+	free_lun,u            &$
+endif else begin         &$
+      about_version = 'EFIT Viewer Version ? (?)' &$
+endelse 
+ok=query_image('efittools.gif',about_info)
+about_image = read_image('efittools.gif',about_r,about_g,about_b)
+save,about_info,about_image,about_version,about_r,about_g,about_b,filename='version.compile'
+
+;; Compile EQ_ANIMATE.COMPILE
+if (file_search('eq_animate_modules.pro'))[0] ne '' then begin &$
+  @eq_animate_modules &$
+  print, 'Saving compiled eq_animate routines to eq_animate.compile ...' &$
+  save,/routines,filename='eq_animate.compile',/xdr &$
+end
+
+;; COMPILE EFIT_VIEWER.COMPILE
+if (file_search('efit_viewer_modules.pro'))[0] ne '' then begin &$
+  @efit_viewer_modules &$
+  print, 'Saving compiled routines to efit_viewer.compile ...' &$
+  save,/routines,filename='efit_viewer.compile',/xdr &$
+end
+
+;; COMPILE EFITVIEWER_VM.SAV
+.compile efitviewer_vm
+print, 'Saving vm main routine to efitviewer_vm.sav ...' 
+save,/routines,filename='efitviewer_vm.sav',/xdr 
+
+;; CREATE EFITVIEWER.CSH 
+print, 'Writting file efitviewer.csh ...'
+initfile = 'efitviewer.csh'
+openw,lun,initfile,/get_lun
+printf,lun,"#! /bin/csh"
+printf,lun,'set license=""'
+printf,lun,'set i=1'
+printf,lun,'while (($i <= ${#argv}) && ($license == ""))' 
+printf,lun,'	if ("$argv[$i]" == "-full") then' 
+printf,lun,'		set license="full"'   
+printf,lun,'	endif'
+printf,lun,'       	@ i = $i + 1'
+printf,lun,'end'
+printf,lun,"setenv IDL_STARTUP ''"
+printf,lun,"setenv IDL_PATH '<IDL_DEFAULT>'"
+printf,lun,"setenv IDLSOURCE '"+_IDLSOURCE_+"'"
+printf,lun,"module load mse"
+printf,lun,"setenv EFITVIEW '"+_IDLSOURCE_+"/efitview'"
+printf,lun,'if ("$license" == "full") then'  
+printf,lun,'	idl '+_IDLSOURCE_+'/efitview/efitviewerstartup'
+printf,lun,'else'
+printf,lun,'	idl -vm='+_IDLSOURCE_+'/efitview/efitviewer_vm.sav'
+printf,lun,'endif'
+printf,lun,"exit"
+free_lun,lun
+spawn,"chmod 775 "+initfile,/sh
+spawn,"chmod 664 efit_viewer.compile",/sh
+
+;; CREATE EQ_ANIMATE.CSH
+if (file_search('eq_animate.compile'))[0] ne '' then begin &$
+  print, 'Writting file efitanimate.csh ...' &$
+  openw,lun,'efitanimate.csh',/get_lun &$
+  printf,lun,"#! /bin/csh" &$
+  printf,lun,'setenv EQ_ANIMATE_COMMANDLINE "$*"' &$
+  printf,lun,"setenv IDL_STARTUP ''" &$
+  printf,lun,"setenv IDL_PATH '<IDL_DEFAULT>'" &$
+  printf,lun,"setenv IDLSOURCE '"+_IDLSOURCE_+"'" &$
+  printf,lun,"setenv mds_event_server atlas.gat.com" &$
+  printf,lun,"idl "+_IDLSOURCE_+"/efitview/eq_animate_startup" &$
+  printf,lun,"exit" &$
+  free_lun,lun &$
+  spawn,"chmod 755 efitanimate.csh",/sh &$
+  spawn,"chmod 664 eq_animate.compile",/sh &$
+end
+
+;; CREATE ANAMES.SAV
+@anamesupdate
+
+exit

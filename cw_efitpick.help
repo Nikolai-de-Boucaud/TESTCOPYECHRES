@@ -1,0 +1,169 @@
+EFIT PICKER HELP					
+
+	- last update: 98.03.20  by Jeff Schachter
+
+This help file describes the EFIT picker.  Particular parts of the
+tool are numbered and explained in more detail below.
+
+The EFIT picker is a software tool used to select EFIT's for data
+retrieval.  The EFIT's can be stored in either a file or in MDSplus.
+
+The EFIT picker is written as a "compound widget" so that it can be
+used from within other IDL GUI applications.  See the IDL 5.0 manual
+"Building IDL Applications" for more information on compound widgets.
+
+===============================================================================
+
+
+(1) Select EFIT from:    [ ] File    [ ] MDSplus
+
+	DIII-D EFIT runs are retrievable from one of two sources, the
+	file system, or MDSplus.  Select the source from which you
+	wish to retrieve EFIT data.
+
+	For "File" mode options, see *** FILE MODE *** below.
+	For "MDSplus" mode options, see *** MDSplus MODE *** below.
+
+(2) Selected:   (- some EFIT listing -)
+
+	This label shows you the currently selected EFIT run.  It will be 
+	blank if no run is selected.  It will display the message
+	"[press ANY FILE button to view]" if you have used the "Any File"
+	method to select the EFIT files (see below).
+
+
+===============================================================================
+
+*** FILE MODE ***
+
+(3) File type:   [ ] a    [ ] g    [ ] m        [ANY FILE]
+
+	The letters in file type refer to the different types of EFIT files
+        ("A"EQDSK files, "G"EQDSK files, and the new "M"easurements NetCDF 
+        file).  The EFIT picker will always attempt to find all types of 
+	EFIT file for every shot and time.  Note that not all file types 
+	may be available for the selected shot and time.  If one of the 
+	letters in the above menu is selected, the EFIT picker will show you
+	ONLY those shots and times *that have the file type indicated*.  If the
+	application calling EFIT picker requires any of these types, the above
+	menu will be "grayed out" so that you may not change the selection
+        of required file types.
+
+	The [ANY FILE] button allows you to specify *any* file as the source
+	for the A, G, or M data.  Pressing this button will pop-up a separate
+	window that is described below in the "ANY FILE MODE" section below.
+
+(4) Path:   [ -some path- ]		[UPDATE]
+ 
+    Selected:    (- some path -)
+
+	This tool is for selecting the current directory in which to search
+	for EFIT files.  You may type any path into the [Path] text entry
+	field.  When you type in this field, the [UPDATE] button lights up,
+	indicating that you must press it (or press the RETURN key) to update
+	to your selected path.
+
+	The "Selected" label shows the currently selected path.  When you type
+	a new path into the [Path] text entry field, the "Selected" label will
+	be different, indicating that the path you are entering has not yet
+	been selected.  Pressing [UPDATE] (or the RETURN key) will select the
+	new path you have specfied in the [Path] text entry field.
+
+
+(5) ["Path" selection list]
+
+	This list is coupled to the path tool described in (4).  It displays 
+	a list of the subdirectories of the current directory, as well as ".."
+	denoting the parent directory of the current directory.  Selecting 
+	one of the directories in this list will change the currently selected
+	path, also changing the contents of the [Path] text entry field and 
+        the "Selected" label described in (4).
+
+
+(6) ["Shot" selection list]
+	
+	This is a list of the shots having EFIT files in the current directory,
+        or in the subdirectory ./shotNNNNNN (where NNNNNN is the 6 digit shot
+	number).  Any file of the format XNNNNNN.TTTTT, where 
+
+		     X = "a","g", or "m", 
+
+		NNNNNN = the 6 digit shot number
+
+		 TTTTT = the time in ms 
+
+	is recognized as an EFIT file, and the shot number NNNNNN is displayed
+	in this list.
+
+	Note that sub-millisecond times are also recognized in the EFIT file
+	name.  For example, a095026.02000_015 corresponds to the AEQDSK file
+	for shot 95026, time 2000.015 ms.  
+
+             *** ONLY SUFFIXES OF THE FORM "_000" WILL BE RECOGNIZED ***
+
+	If there are many shots in one directory, you may type the first few 
+	digits of the shot number into the text entry field at the bottom of
+	the list to enable rapid scrolling to the shot of interest.  Pressing
+	RETURN in this text entry field will attempt to select a shot number
+	exactly matching the one entered.  If there are no matching shots, no
+	selection will be made.
+
+	This type of selection tool - a list plus a text entry field - is 
+	used throughout the EFIT picker.
+ 	
+
+(7) ["Time (ms)" selection list]
+
+	This is the list of times available for the shot selected.  If any of
+	the file types are selected in item (3) then this list will only show
+	the times that have the requested file types.
+
+	If there are many times for one shot, you may type into the text entry
+	field at the bottom of the list to rapidly scroll to the time of 
+	interest.  Pressing RETURN in this field will attempt to select a time
+	exactly matching the one entered.  If there are no matching times, no
+	selection will be made.
+
+	This type of selection tool - a list plus a text entry field - is 
+	used throughout the EFIT picker.
+ 	
+===============================================================================
+
+*** ANY FILE MODE ***
+
+In "Any File" mode, you may select *any* file from the file system to
+use as an a, g, or m file.  Note that EFIT Picker is not checking the
+validity of the file; ie. whether it really contains EFIT data or not.
+If you are using the "Any File" mode, all three file types are assumed
+to be chosen manually by the user, though it is not mandatory to
+specify any particular type.
+
+===============================================================================
+
+*** MDSplus MODE ***
+
+In MDSplus mode, you must select the shot, EFIT run, and time to select EFIT 
+data.  All three selections are made with the "list plus a text entry field"
+tool.  
+
+That is, you may scroll through the list and select the item of choice
+by clicking on it.  More rapid scrolling is possible by typing in the
+text entry field.  Pressing RETURN in the text entry field will try to find an
+exact match to the value entered.  If there is no such match, no selection is
+made.
+
+MDSplus EFITs are stored as complete time histories, together with comments
+and the snapfile.  One set of time-dependent outputs using a particular 
+snapfile is referred to as an "EFIT run", and identified by a 6 letter name
+EFITnn, where nn is a two digit number 01-99.  By convention, the automatic
+control room EFIT's are stored as EFIT01 and EFIT02 as follows:
+
+	EFIT01 = automatic control room EFIT, non-MSE snapfile
+	EFIT02 = automatic control room EFIT, MSE snapfile
+
+After a shot and EFIT run are selected, the EFIT picker will show you the run's
+comments, and allow you to display the snapfile and other information by 
+pressing the [More Info] button.
+
+===============================================================================
+

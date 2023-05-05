@@ -1,0 +1,154 @@
+dee    diii-d
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-------------------------------------------------------  
+ &NAMELIS1
+ RMAJOR =      0.00000
+ RMINOR =      60.0000
+ BTOR =        0.00000
+ TOTCUR =      0.00000
+ RIN =         98.5000
+ ROUT =        243.000
+ ZAX =            0.00
+ NPRIM =             1
+ NIMP =              1
+ NAMEP =           'd'
+ NAMEI =           'c'
+ CER_ION =         'c'
+ ITENP =             0
+ ITTE =              0
+ ITTI =              0
+ ITXJ =              0
+ IANGROT =           1
+ ITANGROT =          0 
+ TAUPIN =      0.50000
+ WNEO =     25*1.00000
+ WNEOT =       1.00000
+ JHIRSH =          110
+ RESISTIVE ='hirshman'
+ FTCALC =      'exact'
+ INENEZ =            1
+ ADJZEFF =           1
+ NBCTIM =            1
+ BCTIME =      0.00000
+ SPLNINPT =      'new'
+ NJENE =             3
+ RENEIN =      101*0.0
+ ENEIN =       101*0.0
+ NJTE =              3
+ RTEIN =       101*0.0
+ TEIN =        101*0.0
+ NJTI =              3
+ RTIIN =       101*0.0
+ TIIN =        101*0.0
+ NJZEF =           101
+ RZEFFIN =     101*0.0
+ ZEFFIN =      101*1.5
+ RANGROT =     101*0.0
+ ANGROTIN =    101*0.0
+ TIME0 =       0.00000
+ TIMMAX =    -0.050000
+ DTMAX =    0.00500000
+ NMAX =            480
+ IFFAR =             0
+ JPRT =              1
+ JFLUX =             0
+ JCOEF =             0
+ JSOURC =            0
+ JBAL =              0
+ JTFUS =             0
+ JSXR =              0
+ NNEU =              1
+ NAMEN = 'd'
+ RUN_PREPLT = .true.
+ /
+ &NAMELIS2
+ IYOKA =                    1
+ ISHOT =               101990
+ ITIME =                 2000
+ NQRAD =                  101
+ QRADR =              101*0.0
+ QRADIN = 	          101*0.0
+ TIMBPLT =            0.00000
+ IBCUR =                    1
+ NBEAMTCX =                 1
+ ITERATE_BEAM =       .false.
+ NAMEB =                  'd'
+ FDBEAM =             1.00000
+ NPART =                50000
+ NPSKIP =                   5
+ MF =                      21
+ FE_TK =                  1.5
+ IEXCIT =                   5
+ IZSTRP =                 2*1
+ NBEAMS =                   8
+ NSOURC =                   2
+ BEAMON =      0.0  7*99.0000
+ BTIME =      10.0  7*100.000
+ BPTOR =            8*1.00000
+ SFRAC1 =           8*0.00000  
+ EBKEV =            8*80.0000  
+ ANGLEH =              8*19.5
+ ANGLEV =               8*0.0
+ RPIVOT =               8*0.0
+ ZPIVOT =               8*0.0
+ BLENP(3) =               0.0
+ BLENP(4) =               0.0
+ FBCUR =               24*0.0
+ ANGRCPLE =           1.00000
+ IRFPLT =                   0
+ IDDFUSRATE =               1
+ IDDFUSB =                  1
+ IDDFUSB_S =                1
+ IMAXBEAMCONVG =           20
+ HDEPSMTH =               1.0
+ RELNUB =                 0.5
+ IDDFUSB_BULK =             1
+ ICALC_CXFACTOR =           0
+ GAFSEP =            0.000001
+ RELRF =             0.250000
+ TORAY_VERSION	=	     1.90
+ TORAY_PATH		=	'/task/imd/toray/xtoray'
+ RFON =             8*1.0E+06
+ RFTIME =              8*-1.0
+ IRFCUR =                 8*1
+ FREQ =            8*1.10E+11
+ WRFO =             8*0.00000
+ HLWEC =                8*1.7
+ RATWEC =               8*1.0
+ RFMODE =             8*'ech'
+ RFPOW =                8*1.0
+ THETEC =               8*0.0
+ PHAIEC =             8*180.0
+ XEC =                8*239.4
+ ZEC =                8*69.61
+ NRAY =                  8*30
+ IDAMP =                  8*8
+ /
+ &NAMELIS3
+ ITERDB =                  -1
+ IFIXSHAP =                 1
+ XDIM =               170.000
+ YDIM =               320.000
+ REDGE =              84.0000
+ EQDSKIN =                 ''
+ IRGUESS =                -99
+ ITORFLUSE =                1
+ /
